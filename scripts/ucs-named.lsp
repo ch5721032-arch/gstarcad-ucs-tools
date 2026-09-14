@@ -1,0 +1,23 @@
+;; ucs-named.lsp - Save, restore and list named UCS settings
+;; Commands: UCSSAVE / UCSGO / UCSLIST
+(defun c:UCSSAVE ( / name )
+  (setq name (getstring T "\nUCS name to save: "))
+  (if (/= name "")
+    (progn
+      (command "_.UCS" "_S" name)
+      (princ (strcat "\nSaved UCS: " name))
+    )
+  )
+  (princ)
+)
+(defun c:UCSGO ( / name )
+  (setq name (getstring T "\nUCS name to restore: "))
+  (if (/= name "")
+    (command "_.UCS" "_R" name)
+  )
+  (princ)
+)
+(defun c:UCSLIST ( )
+  (command "_.UCS" "_?" "" "")
+  (princ)
+)
